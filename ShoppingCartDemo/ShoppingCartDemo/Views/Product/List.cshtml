@@ -1,0 +1,33 @@
+﻿@*@model IEnumerable<ShoppingCartDemo.Models.Product>*@
+@*@model ShoppingCartDemo.ViewModels.ProductListVM*@
+@model ProductListVM
+@*<h1>@ViewBag.SelectedCategory</h1>*@
+<h1>@Model.SelectedCategoryName</h1>
+<hr />
+
+@foreach (var product in Model.Products)
+{
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="@product.ImageUrl" alt="@product.ProductName">
+        <div class="card-body">
+            <h5 class="card-title">@product.ProductName</h5>
+            <h6 class="card-subtitle">@product.category.Name</h6>
+            <p class="card-text">@product.Description</p>
+            <a asp-controller="Product" asp-action="Details"
+               asp-route-id="@product.ProductId" class="btn btn-primary">
+                Product Details
+            </a>
+            <a
+               asp-controller="ShoppingCart"
+               asp-action="AddToShoppingCart"
+               asp-route-productId="@product.ProductId"
+               class="btn btn-primary">Add to Cart</a>
+        </div>
+    </div>
+
+    @*<h2>@product.ProductName</h2>
+        <h2>@product.Description</h2>
+        <h2>@product.Price</h2>
+        <hr />*@
+}
+
